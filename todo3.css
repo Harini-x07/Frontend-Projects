@@ -1,0 +1,168 @@
+body{
+    background-color:white;
+    margin:0px 0px 0px 0px;
+  
+    position:relative;
+}
+
+.fixed-border {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-style: groove;
+    border-color: black;
+    border-width: 30px;
+    pointer-events: none; /* lets you click through */
+    box-sizing: border-box;
+    z-index: 9999;
+}
+
+.top{
+    right:50px;
+    position: fixed;
+    top:45px;
+}
+
+.top button{
+    width:50px;
+    border-style: hidden;
+    background-color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+}
+
+
+h1{
+    margin-top:30px;
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom:40px;
+    font-weight:bolder;
+}
+
+
+.int{
+    display:flex;
+    justify-content: center;
+    align-items:center ;
+    flex-direction: row;
+    gap:40px;
+}
+
+.todolist{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:20px;
+}
+
+.int1{
+    border-style:solid;
+    border-color:black;
+    background-color:lightgray;
+    border-width:10px;
+    width:800px;
+    height:100px;
+    padding:5px;
+    border-radius:15px;
+    color:black;
+    font-size: larger;
+    padding-left:40px;
+}
+
+.int2{
+    border-style:solid;
+    border-color:black;
+    background-color:lightgray;
+    border-width:10px;
+    width:800px;
+    height:100px;
+    padding:5px;
+    border-radius:15px;
+    color:black;
+    font-size: larger;
+    padding-left:40px;
+}
+
+.but1{
+    width:100px;
+    height:100px;
+    border-radius:15px;
+    color:black;
+    font-size: larger;
+    border-style:solid;
+    border-color:black;
+    background-color:lightgray;
+    border-width:5px;
+    padding:5px 5px 5px 5px;
+}
+
+hr{
+    color:black;
+    border-width: 1px;
+    border-color: black;
+}
+
+#tasklist{
+    gap:40px;
+    margin:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img1{
+    bottom:0;
+    left:-40px;
+    position:fixed;
+    z-index:-1;
+}
+
+.img2{
+    bottom:-40px;
+    right:0;
+    position:fixed;
+    z-index:-1;
+}
+
+.taskItem{
+            width:800px;
+            background-color: lightgray;
+            color:black;
+            padding:0px 0px 0px 0px;
+            border-style: solid;
+            border-color:black;
+            border-width: 5px;
+            position:relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-radius:15px;
+}
+
+.taskContent{
+            max-width: 600px;
+            word-wrap: break-word;
+            word-break: break-word;
+            padding-left:10px;
+            padding-top:20px;
+            padding-bottom:20px;
+            font-size: large;
+            font-weight: bolder;
+}
+
+.label{
+        bottom:20px;
+        right:10px;
+        position:absolute;
+        gap:10px;
+        font-size: large;
+        font-weight: bolder;
+}
+
+
+

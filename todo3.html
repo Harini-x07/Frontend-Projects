@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="todo3.css">
+    </head>
+    <body>
+        <div class="fixed-border"></div>
+        <div class="top">
+            <button id="home" onclick="home()">LOGOUT</button>
+            <button id="back" onclick="back()">BACK</button>
+        </div>
+        <h1>PROFESSIONAL TO DO LIST</h1>
+        <div class="int">
+            <div class="todolist">
+                <input type="text" placeholder="Enter the task!" class="int1" id="inttext">
+                <input type="date" placeholder="Enter the date" class="int2" id="intdate">
+            </div>
+            <button type="submit" class="but1" id="buttonEnter" onclick="addTask()">Enter</button>
+        </div>
+        <br>
+        <hr><br>
+        <div id="taskList"></div>
+        <img src="kisspng-social-media-optimization-search-engine-optimizati-5ba11580e1c0a4.7472084515372834569247-removebg-preview.png" class="img1">
+        <img src="64e1445f91ef7210fa76356dfc987d-removebg-preview.png" class="img2">
+        <script>
+            let username=localStorage.getItem("username");
+            let userKey=`tasks_pross_${username}`;
+            
+            window.onload=function(){
+                if(!username){
+                    window.location.href="todo1.html";
+                    return;
+                }
+                loadTasks();
+            }
+            
+            function loadTasks(){
+                const taskList=document.getElementById("taskList");
+                taskList.innerHTML="";
+                const tasks=JSON.parse(localStorage.getItem(userKey))||[];
+                tasks.forEach(task => {
+                    const taskDiv=document.createElement('div');
+                    taskDiv.className='taskItem';
+                    taskDiv.innerHTML=`
+                    <div class="taskContent">
+                    <div class="txt">
+                        TASK: ${task.text}
+                    </div>
+                    <br>
+                    <div class="date">
+                        DATE: ${task.date}
+                    </div>
+                    </div>
+                    <div class="label">
+                        <label><input type="checkbox" class="act">Active</label><br><br>
+                        <label><input type="checkbox" class="completedchk">Completed</label>
+                    </div>`;
+                    const completedTask=taskDiv.querySelector('.completedchk');
+                    const activeCheckbox = taskDiv.querySelector('input.act');
+                    if (task.active) activeCheckbox.checked = true;
+                    activeCheckbox.addEventListener('change', function(){
+                        saveTasks();
+                    });
+                    completedTask.addEventListener('change',function(){
+                        if(this.checked){
+                            taskDiv.remove();
+                            saveTasks();
+                        }
+                    });
+                    taskList.appendChild(taskDiv);
+                });
+            }
+
+            function addTask(){
+                const taskInput=document.getElementById("inttext");
+                const dateInput=document.getElementById("intdate");
+                const taskList=document.getElementById("taskList");
+                const text=taskInput.value.trim();
+                const dateval=dateInput.value||new Date().toISOString().split('T')[0];
+                if(text==="")return;
+                const taskDiv=document.createElement('div');
+                taskDiv.className='taskItem';
+                taskDiv.innerHTML=`
+                <div class="taskContent">
+                <div class="txt">
+                    TASK: ${text}
+                </div>
+                <br>
+                <div class="date">
+                    DATE: ${dateval}
+                </div>
+                </div>
+                <div class="label">
+                    <label><input type="checkbox">Active</label><br><br>
+                    <label><input type="checkbox" class="completedchk">Completed</label>
+                </div>`;
+                const completedTask=taskDiv.querySelector('.completedchk');
+                completedTask.addEventListener('change',function(){
+                    if(this.checked){
+                        taskDiv.remove();
+                        saveTasks();
+                    }
+                });
+                taskList.appendChild(taskDiv);
+                taskInput.value="";
+                dateInput.value="";
+                saveTasks();
+            }
+
+            function saveTasks(){
+                const taskDivs=document.querySelectorAll(".taskItem");
+                const tasks=Array.from(taskDivs).map(div=>{
+                    const text=div.querySelector(".txt").textContent.replace("TASK: ","");
+                    const date = div.querySelector('.date').textContent.replace("DATE: ", "");
+                    const activeCheckbox = div.querySelector('label input[type="checkbox"]:not(.completedchk)');
+                    const completedCheckbox = div.querySelector(".completedchk");
+                    const active = activeCheckbox ? activeCheckbox.checked : false;
+                    const completed = completedCheckbox ? completedCheckbox.checked : false;
+                    return{text,date,active,completed};
+                });
+                localStorage.setItem(userKey,JSON.stringify(tasks));
+            }
+
+            function home(){
+                window.location.href="todo1.html";
+            }
+            
+            function back(){
+                window.location.href="todo2.html";
+            }
+        </script>
+    </body>
+</html>

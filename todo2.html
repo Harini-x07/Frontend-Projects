@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <link rel="Stylesheet" href="todo2.css">
+    </head>
+    <body>
+        <div id="dateTime"></div>
+        <div class="container">
+            <div class="sidescroll">
+                <h1 class="font1">Content</h1>
+                <ul class="list1"><hr class="under">
+                    <li>Active tasks</li><hr class="under"/>
+                    <li>Completed tasks</li><hr class="under"/>
+                    <li>Score</li><hr class="under"/>
+                    <li><button onclick="logout()" class="log">Logout</button></li><hr class="under"/>
+                </ul>
+            </div>
+            <div class="mainarea">
+                <div class="taskbar">
+                    <p class="font1">The Secret of Getting Ahead is getting started!</p>
+                </div>
+                <div class="user" id="userText"></div>
+                <div class="rightpanel">
+                   <div class="card">
+                       <div class="pers" id="pross" onclick="openpross()">
+                            <div>
+                                <img src="7wnaoaqhkr5o-removebg-preview.png" class="img1">
+                                <div><p class="word">PROFESSIONAL <br> TO DO LIST</p></div>
+                            </div>
+                        </div>
+                        <div class="pers1" id="personal" onclick="openpress()">
+                            <div>
+                                <img src="s5lan2lruiff-removebg-preview.png" class="img1">
+                                <div><p class="word">PERSONAL<br> TO DO LIST</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+        function  updateDateTime(){
+            const now=new Date();
+            const date=now.toLocaleDateString();
+            const time=now.toLocaleTimeString();
+            document.getElementById("dateTime").textContent=date+" | "+time;
+        }
+        setInterval(updateDateTime,1000);
+        updateDateTime();
+
+        window.onload=function(){
+            const username=localStorage.getItem("username");
+            if(!username){
+                window.location.href=todo1.html;
+                return;
+            }
+            document.getElementById("userText").textContent="Hi,"+username+"!";
+        }
+
+        function logout(){
+            localStorage.removeItem("username");
+            window.location.href="todo1.html";
+        }
+
+        function openpross(){
+            window.location.href="todo3.html";
+        }
+
+        function openpress(){
+            window.location.href="todo4.html"
+        }
+      </script>
+    </body>
+</html>

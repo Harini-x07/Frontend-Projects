@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Personal To-Do List</title>
+    <style>
+        /* Reset & base */
+        body {
+            margin: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            position: relative;
+            padding: 40px 20px 20px 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Wave background on top */
+        .wave {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 180px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23a0d8f9" fill-opacity="1" d="M0,128L48,133.3C96,139,192,149,288,165.3C384,181,480,203,576,197.3C672,192,768,160,864,149.3C960,139,1056,149,1152,170.7C1248,192,1344,224,1392,240L1440,256L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"/></svg>') no-repeat;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        /* Heading */
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            font-weight: bolder;
+            color: #0b3d91;
+            margin-bottom: 50px;
+            font-size: 3rem;
+            user-select: none;
+        }
+
+        /* Input container */
+        .int {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        /* Task input */
+        .int1, .int2 {
+            border: 3px solid #0b3d91;
+            border-radius: 15px;
+            padding: 15px 25px;
+            font-size: 1.5rem;
+            width: 300px;
+            background-color: #d9ebff;
+            color: #0b3d91;
+            transition: border-color 0.3s ease;
+        }
+        .int1:focus, .int2:focus {
+            border-color: #054a9b;
+            outline: none;
+            background-color: #bcd9ff;
+        }
+
+        /* Enter button */
+        .but1 {
+            background-color: #0b3d91;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-self: center;
+            height: 60px;
+        }
+        .but1:hover {
+            background-color: #054a9b;
+        }
+
+        /* Task list container */
+        #taskList {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Each task item */
+        .taskItem {
+            background-color: #d9ebff;
+            border: 3px solid #0b3d91;
+            border-radius: 15px;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #0b3d91;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Task text and date container */
+        .taskContent {
+            max-width: 60%;
+            word-wrap: break-word;
+        }
+
+        /* Label and checkboxes */
+        .label {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* Buttons container */
+        .buttons {
+            max-width: 700px;
+            margin: 30px auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .buttons button {
+            flex: 1;
+            background-color: #0b3d91;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 15px 0;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons button:hover {
+            background-color: #054a9b;
+        }
+
+        /* Images styling */
+        .img1, .img2 {
+            position: fixed;
+            bottom: 10px;
+            width: 80px;
+            opacity: 0.2;
+            user-select: none;
+            pointer-events: none;
+        }
+        .img1 {
+            left: 10px;
+        }
+        .img2 {
+            right: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .int1, .int2 {
+                width: 100%;
+            }
+            .taskItem {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .taskContent {
+                max-width: 100%;
+            }
+            .buttons {
+                flex-direction: column;
+            }
+            .buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wave"></div>
+
+    <h1>PERSONAL TO DO LIST</h1>
+    <div class="int">
+        <input type="text" placeholder="Enter the task!" class="int1" id="inttext" />
+        <input type="date" class="int2" id="intdate" />
+        <button class="but1" id="buttonEnter" onclick="addTask()">Enter</button>
+    </div>
+
+    <div id="taskList"></div>
+
+    <div class="buttons">
+        <button onclick="clearAll()">Clear All</button>
+        <button onclick="logoutUser()">Logout</button>
+    </div>
+
+    <!-- Optional decorative images -->
+    <img src="https://i.imgur.com/GQWvO07.png" alt="decor1" class="img1" />
+    <img src="https://i.imgur.com/EuD7dMw.png" alt="decor2" class="img2" />
+
+    <script>
+        const username = localStorage.getItem("username");
+        const userKey = `tasks_${username}`;
+
+        window.onload = function () {
+            if (!username) {
+                window.location.href = "todo1.html";
+                return;
+            }
+            loadTasks();
+        };
+
+        function loadTasks() {
+            const taskList = document.getElementById("taskList");
+            taskList.innerHTML = "";
+            const tasks = JSON.parse(localStorage.getItem(userKey)) || [];
+            tasks.forEach(task => {
+                const taskDiv = document.createElement("div");
+                taskDiv.className = "taskItem";
+                taskDiv.innerHTML = `
+                    <div class="taskContent">
+                        <div>TASK: ${task.text}</div>
+                        <div>DATE: ${task.date}</div>
+                    </div>
+                    <div class="label">
+                        <label><input type="checkbox" class="activeChk"> Active</label>
+                        <label><input type="checkbox" class="completedchk"> Completed</label>
+                    </div>
+                `;
+
+                // Active checkbox functionality (optional, currently just toggles)
+                const activeChk = taskDiv.querySelector(".activeChk");
+                activeChk.checked = true; // default checked as active
+
+                activeChk.addEventListener("change", () => {
+                    // you can add any active/inactive style or logic here if you want
+                });
+
+                // Completed checkbox removes the task
+                const completedChk = taskDiv.querySelector(".completedchk");
+                completedChk.addEventListener("change", function () {
+                    if (this.checked) {
+                        taskDiv.remove();
+                        saveTasks();
+                    }
+                });
+
+                taskList.appendChild(taskDiv);
+            });
+        }
+
+        function addTask() {
+            const taskInput = document.getElementById("inttext");
+            const dateInput = document.getElementById("intdate");
+            const taskList = document.getElementById("taskList");
+            const text = taskInput.value.trim();
+            const dateval = dateInput.value || new Date().toISOString().split("T")[0];
+            if (text === "") return;
+
+            const taskDiv = document.createElement("div");
+            taskDiv.className = "taskItem";
+            taskDiv.innerHTML = `
+                <div class="taskContent">
+                    <div>TASK: ${text}</div>
+                    <div>DATE: ${dateval}</div>
+                </div>
+                <div class="label">
+                    <label><input type="checkbox" class="activeChk" checked> Active</label>
+                    <label><input type="checkbox" class="completedchk"> Completed</label>
+                </div>
+            `;
+
+            const completedChk = taskDiv.querySelector(".completedchk");
+            completedChk.addEventListener("change", function () {
+                if (this.checked) {
+                    taskDiv.remove();
+                    saveTasks();
+                }
+            });
+
+            taskList.appendChild(taskDiv);
+            taskInput.value = "";
+            dateInput.value = "";
+            saveTasks();
+        }
+
+        function saveTasks() {
+            const taskDivs = document.querySelectorAll(".taskItem");
+            const tasks = Array.from(taskDivs).map(div => {
+                const text = div.querySelector(".taskContent div:first-child").textContent.replace("TASK: ", "");
+                const date = div.querySelector(".taskContent div:last-child").textContent.replace("DATE: ", "");
+                return { text, date };
+            });
+            localStorage.setItem(userKey, JSON.stringify(tasks));
+        }
+
+        function clearAll() {
+            if (confirm("Are you sure you want to clear all tasks?")) {
+                localStorage.removeItem(userKey);
+                loadTasks();
+            }
+        }
+
+        function logoutUser() {
+            localStorage.removeItem("username");
+            window.location.href = "todo1.html";
+        }
+    </script>
+</body>
+</html>

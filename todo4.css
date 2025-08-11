@@ -1,0 +1,181 @@
+body{
+    margin:0;
+    position:relative;
+}
+
+.background{
+    background-image: url("https://www.baltana.com/files/wallpapers-5/Black-And-White-Background-High-Definition-Wallpaper-16256.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;  
+    background-color: rgba(0,0,0,0.3); 
+    width:100vw;
+    height: 100vh;
+    filter:blur(7px);
+    position: fixed;
+    z-index: -1;
+}
+
+
+.fixed-border {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-style: groove;
+    border-color: grey;
+    border-width: 30px;
+    pointer-events: none; 
+    box-sizing: border-box;
+    z-index: 9999;
+}
+
+
+.top{
+    right:0px;
+    position: fixed;
+    top:30px;
+    background-color:white;
+    width:100%;
+    height:30px;
+}
+
+.top button{
+    position:fixed;
+    width:50px;
+    border-style: hidden;
+    background:none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+}
+
+.top button#home{
+    right:100px;
+    position: fixed;
+}
+
+.top button#back{
+    right:40px;
+    position: fixed;
+}
+
+
+h1{
+    margin-top:60px;
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom:40px;
+    font-weight:bolder;
+    color:black;
+    background-color: white;
+    width:100%;
+}
+
+.int{
+    display:flex;
+    justify-content: center;
+    align-items:center ;
+    flex-direction: column;
+    gap:40px;
+}
+
+.todolist{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap:20px;
+}
+
+.int1{
+    border-style:solid;
+    border-color:black;
+    background-color:white;
+    border-width:5px;
+    width:500px;
+    height:60px;
+    padding:5px;
+    border-radius:15px;
+    color:black;
+    font-size: larger;
+    padding-left:40px;
+}
+
+.int2{
+    border-style:solid;
+    border-color:black;
+    background-color:white;
+    border-width:5px;
+    width:500px;
+    height:60px;
+    padding:5px;
+    border-radius:15px;
+    color:black;
+    font-size: larger;
+    padding-left:40px;
+}
+
+.but1{
+    width:100px;
+    height:50px;
+    border-radius:15px;
+    color:black;
+    font-size: larger;
+    border-style:solid;
+    border-color:black;
+    background-color:white;
+    border-width:5px;
+    padding:5px 5px 5px 5px;
+}
+
+hr{
+    color:white;
+    border-width: 1px;
+    border-color: white;
+}
+
+#tasklist{
+    gap:40px;
+    margin:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.taskItem{
+            width:800px;
+            background-color: white;
+            color:black;
+            padding:0px 0px 0px 0px;
+            border-style: solid;
+            border-color:black;
+            border-width: 5px;
+            position:relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-radius:15px;
+}
+
+.taskContent{
+            max-width: 600px;
+            word-wrap: break-word;
+            word-break: break-word;
+            padding-left:10px;
+            padding-top:20px;
+            padding-bottom:20px;
+            font-size: large;
+            font-weight: bolder;
+}
+
+.label{
+        bottom:20px;
+        right:10px;
+        position:absolute;
+        gap:10px;
+        font-size: large;
+        font-weight: bolder;
+}

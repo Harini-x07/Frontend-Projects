@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <style>
+            .taskItem{
+                width:800px;
+                background-color: black;
+                color:white;
+                padding:0px 0px 0px 0px;
+                border-style: solid;
+                border-color:darkgray;
+                border-width: 15px;
+                position:relative;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+
+            .taskContent{
+                max-width: 600px;
+                word-wrap: break-word;
+                word-break: break-word;
+                padding-left:10px;
+                padding-top:20px;
+                padding-bottom:20px;
+            }
+
+             .label{
+                bottom:20px;
+                right:10px;
+                position:absolute;
+                gap:10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="taskItem">
+            <div class="taskContent">
+                <div class="txt">
+                    TASK:
+                </div>
+                <br>
+                <div class="date">
+                    DATE:
+                </div>
+            </div>
+            <div class="label">
+                <label><input type="checkbox">Active</label><br><br>
+                <label><input type="checkbox">Completed</label>
+            </div>
+        </div>
+    </body>
+</html>
